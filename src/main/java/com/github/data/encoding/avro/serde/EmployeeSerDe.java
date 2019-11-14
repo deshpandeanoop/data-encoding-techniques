@@ -13,11 +13,13 @@ public class EmployeeSerDe extends AbstractSerDe<Employee> {
     private static final Logger logger = LoggerFactory.getLogger(EmployeeSerDe.class);
 
     @Override
-    public void serializeToFile(Employee employee, String destination) throws Exception {
+    public void serializeToFile(List<Employee> employees, String destination) throws Exception {
         logger.info("Serializing employee to {}", destination);
-        schema = employee.getSchema();
+        schema = employees.get(0).getSchema();
         DataFileWriter<Employee> dataFileWriter = constructDataFileWriter(constructDatumWriter(Employee.class), destination);
-        dataFileWriter.append(employee);
+        for(Employee employee : employees){
+            dataFileWriter.append(employee);
+        }
         dataFileWriter.close();
     }
 

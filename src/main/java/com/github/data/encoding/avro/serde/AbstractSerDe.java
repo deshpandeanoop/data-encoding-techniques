@@ -37,7 +37,7 @@ public abstract class AbstractSerDe<T> {
         return new DataFileReader(new File(source), datumReader);
     }
 
-    public abstract void serializeToFile(T bean,String destination) throws Exception;
+    public abstract void serializeToFile(List<T> beans,String destination) throws Exception;
 
     public abstract List<T> deserializeFromFile(String source) throws Exception;
 }
